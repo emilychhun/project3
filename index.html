@@ -28,22 +28,27 @@
   </div>
 </div>
 <script>
-
+alert ( "Welcome to Generate a Secure Password");
 let enter;
-let confirmNumber;
-let confirmUppercase;
+let confirmNum;
+let confirmUpper;
 let confirmLowercase;
 let confirmCharacter;
-character = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", 
-" < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}",];
 
-number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-alpha2 =["A","B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N",
+ALPHA =["A","B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N",
  "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-var get = document.querySelector("#generate");
+
+
+char = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", 
+" < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}",];
+
+Num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+
+let get = document.querySelector("#generate");
 
 get.addEventListener("click", function () {
     ps = generatePassword();
@@ -60,62 +65,62 @@ function generatePassword() {
 
 } else {
     
-    confirmNumber = confirm("Will this contain numbers?");
+    confirmNum = confirm("Will this contain numbers?");
     confirmCharacter = confirm("Will this contain special characters?");
     confirmUppercase = confirm("Will this contain Uppercase letters?");
     confirmLowercase = confirm("Will this contain Lowercase letters?");
 };
 
-if (!confirmCharacter && !confirmNumber && !confirmUppercase && !confirmLowercase) {
-        choices = alert("You must choose a criteria!");
+if (!confirmCharacter && !confirmNum && !confirmUppercase && !confirmLowercase) {
+        choices = alert("You must choose a password!");
 
     }
-    else if (confirmCharacter && confirmNumber && confirmUppercase && confirmLowercase) {
+    else if (confirmCharacter && confirmNum && confirmUppercase && confirmLowercase) {
 
-choices = character.concat(number, alpha, alpha2);}
+choices = char.concat(Num, alpha, ALPHA);}
 
-else if (confirmCharacter && confirmNumber && confirmUppercase && confirmLowercase) {
+else if (confirmCharacter && confirmNum && confirmUppercase && confirmLowercase) {
 
-choices = character.concat(number, alpha, alpha2);
+choices = char.concat(Num, alpha, ALPHA);
 
 } else if (confirmCharacter && confirmLowercase) {
-        choices = character.concat(alpha);
+        choices = char.concat(alpha);
 
     } else if (confirmCharacter && confirmUppercase) {
-        choices = character.concat(alpha2);
+        choices = char.concat(ALPHA);
     }
-    else if (confirmLowercase && confirmNumber) {
-        choices = alpha.concat(number);
+    else if (confirmLowercase && confirmNum) {
+        choices = alpha.concat(Num);
 
     } else if (confirmLowercase && confirmUppercase) {
-        choices = alpha.concat(alpha2);
+        choices = alpha.concat(ALPHA);
 
-    } else if (confirmNumber && confirmUppercase) {
-        choices = number.concat(alpha2);
+    } else if (confirmNum && confirmUppercase) {
+        choices = Num.concat(ALPHA);
     }
-    // Else if for 1 positive option
+
     else if (confirmCharacter) {
-        choices = character;
+        choices = char;
     }
-    else if (confirmNumber) {
-        choices = number;
+    else if (confirmNum) {
+        choices = Num;
     }
     else if (confirmLowercase) {
         choices = alpha;
     }
 
     else if (confirmUppercase) {
-        choices = space.concat(alpha2);
+        choices = ALPHA;
     };
     var password = [];
 
-    for (var i = 0; i < enter; i++) {
-        var pickChoices = choices[Math.floor(Math.random() * choices.length)];
+    for (let i = 0; i < enter; i++) {
+        let pickChoices = choices[Math.floor(Math.random() * choices.length)];
         password.push(pickChoices);
     }
 
 
-    var ps = password.join("");
+    let ps = password.join("");
     UserInput(ps);
     return ps;}
     function UserInput(ps) {
@@ -123,7 +128,7 @@ choices = character.concat(number, alpha, alpha2);
 
 }
 
-var copy = document.querySelector("#copy");
+let copy = document.querySelector("#copy");
 copy.addEventListener("click", function () {
     copyPassword();
 });
