@@ -5,16 +5,16 @@ html,body{
     text-align: center;
     background: url(./assets/passwords.html);
 }
-#wrapper
+.wrapper
 {
     width: 450px;
     background: darkcyan;
     border: 1px solid white;
     border-radius: 5px;
     height: 325px;
-
+    
 }
-#content
+.content
 {
     width: 300px;
     background: darkgray;
@@ -30,7 +30,7 @@ html,body{
 {
     color: white;
 }
-#generate
+.note
 {
    
     height: 30px;
@@ -42,7 +42,7 @@ font-size: 12px;
 
 }
 
-#copy
+.copy
 {
     height: 30px;
 border-radius: 50px;
@@ -53,11 +53,11 @@ font-weight: bolder;
 }
 
 
-#generate:hover{
+.note:hover{
     background: red;
     border-radius: 50px;
 }
-#copy:hover{
+.copy:hover{
     background: blueviolet;
     border-radius: 50px;
 }

@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
- <div id="wrapper">
+ <div class="wrapper">
 <header>
 <h1>Password Generator</h1>
 </header>
-   <div id="content">
+   <div class="content">
     <h2 id=text>Generate a Password<h2>
         <hr>
-       <textarea readonly id="password" placeholder ="Your Secure Password" 
+       <textarea readonly id="securePassword" placeholder ="Your Secure Password" 
        aria-label="Generated Password"></textarea>
        <hr>
    
@@ -22,99 +22,139 @@
       
       
        <div id="btn" >
-           <button id="generate">Generate Password</button>
-         <button id="copy">Copy to Clipboard</button>
+           <button class="note">Generate Password</button>
+         <button class="copy">Copy to Clipboard</button>
         </div>
   </div>
 </div>
 <script>
 alert ( "Welcome to Generate a Secure Password");
-let enter;
-let confirmNum;
-let confirmUpper;
-let confirmLowercase;
-let confirmCharacter;
 
 alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 ALPHA =["A","B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N",
  "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-
-
 char = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", 
 " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}",];
 
-Num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+Num = ["1", "2", "3", "4",, "5", "6", "7", "8", "9", "0"];
 
+let generate;
+let confirmNum;
+let confirmUpper;
+let confirmLower;
+let confirmChar;
 
-let get = document.querySelector("#generate");
+let myArray = document.querySelector(".note");
 
-get.addEventListener("click", function () {
+myArray.addEventListener("click", function () {
     ps = generatePassword();
-    document.getElementById("password").placeholder = ps;
+    document.getElementById("securePassword").placeholder = ps;
 });
 
 function generatePassword() {
-    enter = parseInt(prompt("How many characters would you like your password? Choose between 8 and 128"));
-    if (!enter) {
-        alert("This needs a value");
-    } else if (enter < 8 || enter > 128) {
-
-        enter = parseInt(prompt("You must choose between 8 and 128"));
-
-} else {
+generate = parseInt(prompt("How many characters would you like for your password? Please, enter between 8 and 128."));
     
-    confirmNum = confirm("Will this contain numbers?");
-    confirmCharacter = confirm("Will this contain special characters?");
-    confirmUppercase = confirm("Will this contain Uppercase letters?");
-    confirmLowercase = confirm("Will this contain Lowercase letters?");
-};
+if (!generate) {
+        alert("Please, Select your Password.");
+    } else if (generate < 8 || generate > 128) {
 
-if (!confirmCharacter && !confirmNum && !confirmUppercase && !confirmLowercase) {
-        choices = alert("You must choose a password!");
+    generate = parseInt(prompt("Please; try again!  You must choose between 8 and 128"));
+
+    } else {
+    
+    confirmNum = confirm("Do you want include numbers?");
+    confirmChar = confirm("Do you want include special characters?");
+    confirmUpper = confirm("Do you want include Uppercase letters?");
+    confirmLower = confirm("Do you want include Lowercase letters?");
+    };
+
+if (!confirmChar && !confirmNum && !confirmUpper && !confirmLower) {
+    choices = alert("You must choose a password!");
+
+    }else if (confirmChar && confirmNum && confirmUpper && confirmLower) {
+
+     choices = char.concat(Num, alpha, ALPHA);
 
     }
-    else if (confirmCharacter && confirmNum && confirmUppercase && confirmLowercase) {
 
-choices = char.concat(Num, alpha, ALPHA);}
+    else if (confirmNum && confirmUpper && confirmLower) {
 
-else if (confirmCharacter && confirmNum && confirmUppercase && confirmLowercase) {
+    choices = Num.concat( alpha, ALPHA);}
 
-choices = char.concat(Num, alpha, ALPHA);
 
-} else if (confirmCharacter && confirmLowercase) {
+    else if (confirmChar && confirmUpper && confirmLower) {
+
+    choices = char.concat(alpha, ALPHA);}
+
+    else if (confirmChar && confirmNum && confirmLower) {
+
+    choices = char.concat(Num, alpha);}
+
+
+    else if (confirmChar && confirmNum && confirmUpper) {
+
+    choices = char.concat(Num, ALPHA);
+
+
+
+    } else if (confirmChar && confirmLower) {
         choices = char.concat(alpha);
 
-    } else if (confirmCharacter && confirmUppercase) {
+    } else if (confirmChar && confirmUpper) {
         choices = char.concat(ALPHA);
+
+    } else if (confirmChar && num) {
+        choices = char.concat(num);
+
     }
-    else if (confirmLowercase && confirmNum) {
+    else if (confirmLower && confirmNum) {
         choices = alpha.concat(Num);
 
-    } else if (confirmLowercase && confirmUppercase) {
+    } 
+    else if (confirmLower && confirmUpper) {
         choices = alpha.concat(ALPHA);
 
-    } else if (confirmNum && confirmUppercase) {
+   
+    } 
+    else if (confirmNum && confirmUpper) {
         choices = Num.concat(ALPHA);
+   
+   
+   
     }
-
-    else if (confirmCharacter) {
+     else if (confirmChar) {
         choices = char;
     }
     else if (confirmNum) {
         choices = Num;
     }
-    else if (confirmLowercase) {
+    else if (confirmLower) {
         choices = alpha;
     }
 
-    else if (confirmUppercase) {
+    else if (confirmUpper) {
         choices = ALPHA;
     };
-    var password = [];
+   
+    let copy = document.querySelector(".copy");
+copy.addEventListener("click", function () {
+    copyPassword();
+});
+function copyPassword() {
+    document.getElementById("securePassword").select();
+    document.execCommand("Copy");
+    alert("Your Password had been Copy!");
+}
+   
 
-    for (let i = 0; i < enter; i++) {
+
+
+
+    let password = [];
+
+    for (let i = 0; i < generate; i++) {
         let pickChoices = choices[Math.floor(Math.random() * choices.length)];
         password.push(pickChoices);
     }
@@ -124,19 +164,11 @@ choices = char.concat(Num, alpha, ALPHA);
     UserInput(ps);
     return ps;}
     function UserInput(ps) {
-    document.getElementById("password").textContent = ps;
+    document.getElementById("securePassword").textContent = ps;
 
 }
 
-let copy = document.querySelector("#copy");
-copy.addEventListener("click", function () {
-    copyPassword();
-});
-function copyPassword() {
-    document.getElementById("password").select();
-    document.execCommand("Copy");
-    alert("Password copied to clipboard!");
-}
+
 
 </script>
 
